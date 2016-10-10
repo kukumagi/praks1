@@ -12,7 +12,7 @@ IP = '127.0.0.1'
 #IP = '192.168.3.35'
 PORT = 1215
 
-laziness = 1
+laziness = 0.5
 url = 'http://192.168.3.11:1215/getpeers'
 
 neighbours = []
@@ -70,7 +70,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         if message in ["/download", "/download/"]:
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-            if random.random < laziness:
+            if random.random > laziness:
                 #download
                 print('downloading')
             else:
