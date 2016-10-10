@@ -3,7 +3,7 @@
 import urllib, urllib.request
 import json
 import threading
-import _thread
+import random
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
@@ -25,12 +25,21 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
+        # Send message back to client
+        message = "OK"
+        # Write content as utf-8 data
+        self.wfile.write(bytes(message, "utf8"))
+
         senderip = self.client_address
         message = urllib.parse.urlsplit(self.path).path
         params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
         status = ""
         if message in ["/file", "/file/"]:
-            pass
+            try:
+                params['id']
+                #return
+            except:
+                status = "Error in parameters"
         else:
             status = "Error"
 
@@ -50,20 +59,22 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         message = "OK"
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
-        self.wfile.write(bytes("\n<br>" + str(self.client_address), "utf8"))
-        self.wfile.write(bytes("\n<br>" + str(urllib.parse.urlsplit(self.path)), "utf8"))
-        self.wfile.write(bytes("\n<br>" + str(urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)), "utf8"))
 
         message = urllib.parse.urlsplit(self.path).path
-        params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
         status = ""
         if message in ["/download", "/download/"]:
-            query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+            params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
             try:
-                query['id']
-                query['url']
+                params['id']
+                params['url']
+                if random.random >= laziness:
+                    #download
+                    pass
+                else:
+                    #forward
+                    pass
             except:
-                status = "Error in query"
+                status = "Error in parameters"
         else:
             status = "Error in path"
 
@@ -96,9 +107,14 @@ def getpeers():
         if t in neighbours:
             pass
         else:
-            neighbours.append(t)
+            #neighbours.append(t)
+            print(t[0])
+            neighbours['ip'].append(t[0])
+            neighbours['port'].append(t[1])
     print(neighbours)
 
+def genid():
+    random.randint(1, 100000)
 
 def run():
     print('starting server....')
