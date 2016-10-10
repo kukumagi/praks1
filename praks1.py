@@ -46,18 +46,15 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         form = cgi.FieldStorage
         if message in ["/file", "/file/"]:
-            try:
-                params['id']
-                download = 1
-                for x in route:
-                    if params['id'][0] == x['ID']:
-                        forwardpost(x['SENDERIP'], params['id'][0], form['content'])
-                        download = 2
-                if download == 1:
-                    print(base64.b64decode(form['content']))
-                #return
-            except:
-                status = "Error in parameters"
+            params['id']
+            download = 1
+            for x in route:
+                if params['id'][0] == x['ID']:
+                    forwardpost(x['SENDERIP'], params['id'][0], form['content'])
+                    download = 2
+            if download == 1:
+                print(base64.b64decode(form['content']))
+            #return
         else:
             status = "Error"
 
