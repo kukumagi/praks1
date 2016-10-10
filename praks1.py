@@ -4,6 +4,7 @@ import urllib, urllib.request
 import json
 import threading
 import random
+import base64
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
@@ -78,10 +79,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 #download
                 print('downloading')
                 with urllib.request.urlopen(urllib.parse.unquote(params['url'][0])) as page:
-                    data = page.read()
-                    self.wfile.write(data)
+                    mybytes = page.read()
+                    #self.wfile.write(data)
+                    data = mybytes.decode("utf8")
                     page.close()
-                    sendback(senderip, params)
+                    sendback(senderip, params, data)
             else:
                 print('forwarding')
                 #forward
@@ -119,13 +121,13 @@ def forward(x, params):
     response = connection.getresponse()
     print(response.read().decode())
 
-def sendback(ip, params):
+def sendback(ip, params, data):
     print('Returning to ...')
     connection = HTTPConnection(ip[0] + ':' + ip[1])
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
-    #headers = {'Content-type': 'application/json'}
-    connection.request('POST', '/file?id=' + params['id'][0])
+    body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data)}
+    connection.request('POST', '/file?id=' + params['id'][0], body)
     response = connection.getresponse()
     print(response.read().decode())
 
