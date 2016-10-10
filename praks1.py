@@ -18,6 +18,11 @@ url = 'http://192.168.3.11:1215/getpeers'
 neighbours = []
 route = []
 
+ID = 0
+DOWNLOADIP = 1
+FILEIP = 2
+
+
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -60,6 +65,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
 
+        senderip = self.client_address
         message = urllib.parse.urlsplit(self.path).path
         status = ""
         if message in ["/download", "/download/"]:
@@ -72,6 +78,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                     pass
                 else:
                     #forward
+                    route[0] = { 'ID' : params['id'], 'SENDERIP' : senderip }
                     pass
             except:
                 status = "Error in parameters"
@@ -107,11 +114,12 @@ def getpeers():
         if t in neighbours:
             pass
         else:
-            neighbours.append(t)
+            #neighbours.append(t)
+            neighbours[0] = { 'IP' : t[0], 'PORT' : t[1]}
     print(neighbours)
 
 def genid():
-    random.randint(1, 100000)
+    return random.randint(1, 100000)
 
 def run():
     print('starting server....')
