@@ -104,7 +104,7 @@ def forward(x, params):
     print('Forwarding to ...')
     connection = HTTPConnection(x['IP'] + ':' + x['PORT'])
     print('forward ip:' + x['IP'] + ':' + x['PORT'])
-    print('/download?id=' + params['id'] + '&url=' + params['url'])
+    print(params['id'] + params['url'])
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
     connection.request('GET', '/download?id=' + params['id'] + '&url=' + params['url'])
