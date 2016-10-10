@@ -67,7 +67,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(message, "utf8"))
 
         senderip = self.client_address
-        print(senderip[0])
+        print('Sender ip : ' + senderip)
         message = urllib.parse.urlsplit(self.path).path
         status = ""
         if message in ["/download", "/download/"]:
@@ -78,8 +78,9 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 print('downloading')
                 with urllib.request.urlopen(urllib.parse.unquote(params['url'][0])) as page:
                     data = page.read()
-                    self.wfile.write(data.decode('utf8'), "utf8")
+                    self.wfile.write(data, "utf8")
                     page.close()
+                    sendback(senderip, params)
             else:
                 print('forwarding')
                 #forward
@@ -114,6 +115,16 @@ def forward(x, params):
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
     connection.request('GET', '/download?id=' + params['id'][0] + '&url=' + params['url'][0])
+    response = connection.getresponse()
+    print(response.read().decode())
+
+def sendback(ip, params):
+    print('Returning to ...')
+    connection = HTTPConnection(ip[0] + ':' + ip[1])
+    #print(params['id'][0])
+    #connection = http.client.HTTPSConnection('google.ee')
+    #headers = {'Content-type': 'application/json'}
+    connection.request('POST', '/file?id=' + params['id'][0])
     response = connection.getresponse()
     print(response.read().decode())
 
