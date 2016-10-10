@@ -86,11 +86,11 @@ def getpeers():
     for x in peers_obj:
         print(x.split(sep=':'))
         i += 1
-    threading.Timer(60, getpeers()).start()
+
 
 def run():
     print('starting server....')
-    getpeers()
+    threading.Timer(60, getpeers).start()
 
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = (IP, PORT)
