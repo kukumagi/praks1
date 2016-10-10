@@ -65,7 +65,7 @@ def getpeers():
     # f = urllib.request.urlopen('http://192.168.3.11:1215/getpeers')
     # print(f.read())
 
-    # req = urllib.request.Request(url)
+    ## req = urllib.request.Request(url)
     # with urllib.request.urlopen(req) as response:
     #     the_page = response.read()
     #     print(the_page)
