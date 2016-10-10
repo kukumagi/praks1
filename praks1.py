@@ -78,7 +78,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 print('downloading')
                 with urllib.request.urlopen(urllib.parse.unquote(params['url'][0])) as page:
                     data = page.read()
-                    self.wfile.write(bytes(data, "utf8"))
+                    self.wfile.write(data)
                     page.close()
             else:
                 print('forwarding')
