@@ -64,6 +64,7 @@ def testclient():
     print(response.read().decode())
 
 def getpeers():
+    threading.Timer(5, getpeers).start()
     print('getting peers')
 
     # f = urllib.request.urlopen('http://192.168.3.11:1215/getpeers')
@@ -90,7 +91,7 @@ def getpeers():
 
 def run():
     print('starting server....')
-    threading.Timer(5, getpeers).start()
+    getpeers()
 
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = (IP, PORT)
