@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import urllib, urllib.request
-import urllib.unquote
 import json
 import threading
 import random
@@ -77,7 +76,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             if random.random() < laziness:
                 #download
                 print('downloading')
-                with urllib.request.urlopen(urllib.unquote(params['url'][0])) as page:
+                with urllib.request.urlopen(urllib.parse.unquote(params['url'][0])) as page:
                     mybytes = page.read()
                     data = mybytes.decode("utf8")
                     self.wfile.write(bytes(data, "utf8"))
