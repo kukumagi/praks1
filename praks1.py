@@ -115,7 +115,7 @@ def getpeers():
             pass
         else:
             #neighbours.append(t)
-            neighbours[0] = { 'IP' : t[0], 'PORT' : t[1]}
+            neighbours[len(neighbours)] = { 'IP' : t[0], 'PORT' : t[1]}
     print(neighbours)
 
 def genid():
