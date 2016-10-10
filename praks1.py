@@ -64,16 +64,8 @@ def testclient():
     print(response.read().decode())
 
 def getpeers():
-    threading.Timer(5, getpeers).start()
+    threading.Timer(60, getpeers).start()
     print('getting peers')
-
-    # f = urllib.request.urlopen('http://192.168.3.11:1215/getpeers')
-    # print(f.read())
-
-    ## req = urllib.request.Request(url)
-    # with urllib.request.urlopen(req) as response:
-    #     the_page = response.read()
-    #     print(the_page)
 
     with urllib.request.urlopen(url) as page:
         mybytes = page.read()
@@ -85,7 +77,8 @@ def getpeers():
         print(peers_obj[0])
     i = 0
     for x in peers_obj:
-        print(x.split(sep=':'))
+        t = x.split(sep=':')
+        neighbours[i] = t
         i += 1
 
 
