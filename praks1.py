@@ -2,6 +2,7 @@
 
 import urllib, urllib.request
 
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
 
@@ -9,7 +10,7 @@ IP = '127.0.0.1'
 PORT = 1215
 
 laziness = 0.5
-directory = 'http://192.168.3.249:1215/getpeers'
+url = 'http://192.168.3.249:1215/getpeers'
 
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
@@ -60,12 +61,12 @@ def testclient():
 
 def getpeers():
     print('getting peers')
-    page = urllib.request.urlopen(directory)
-    mybytes = page.read()
-
-    peers = mybytes.decode("utf8")
-    page.close()
-    print(peers)
+    with urllib.request.urlopen(url) as page:
+        mybytes = page.read()
+        print(mybytes)
+        peers = mybytes.decode("utf8")
+        page.close()
+        print(peers)
 
 def run():
     print('starting server...')
