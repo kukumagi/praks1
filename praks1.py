@@ -79,7 +79,7 @@ def getpeers():
         peers = mybytes.decode("utf8")
         page.close()
         print(peers)
-        peers_obj = json.load(peers)
+        peers_obj = json.loads(peers)
         #peers_obj[0] omab ip v''rtust
     for x in range(len(peers_obj)):
         neighbours[x] = peers_obj[x].split(sep=':')
