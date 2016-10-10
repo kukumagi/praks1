@@ -58,7 +58,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
         status = ""
         if message in ["/download", "/download/"]:
-            query = str(urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query))
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
             print(query)
             obj = json.loads(query)
             self.wfile.write(bytes("\n<br>" + str(obj[0]), "utf8"))
