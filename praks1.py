@@ -80,7 +80,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                     #forward
                     temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
                     route.append(temp)
-                    print(route[0])
+                    print(route[1])
             except:
                 status = "Error in parameters"
         else:
