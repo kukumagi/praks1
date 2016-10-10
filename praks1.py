@@ -75,12 +75,14 @@ def getpeers():
         peers_obj = json.loads(peers)
         #peers_obj[0] omab ip v''rtust.
         print(peers_obj[0])
-    i = 0
+
     for x in peers_obj:
         t = x.split(sep=':')
-        neighbours.append(t)
+        if t in neighbours:
+            pass
+        else:
+            neighbours.append(t)
         print(neighbours)
-        i += 1
 
 
 def run():
