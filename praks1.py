@@ -73,7 +73,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             try:
                 params['id']
                 params['url']
-                if random.random > laziness:
+                if random.random < laziness:
                     #download
                     pass
                 else:
