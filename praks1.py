@@ -59,7 +59,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         if message in ["/download", "/download/"]:
             query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-            print(query['id'])
+            try:
+                query['id']
+                query['url']
+            except:
+                status = "Error in query"
         else:
             status = "Error in path"
 
