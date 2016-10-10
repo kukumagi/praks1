@@ -64,7 +64,7 @@ def testclient():
     print(response.read().decode())
 
 def getpeers():
-    threading.Timer(60, getpeers).start()
+    threading.Timer(5, getpeers).start()
     print('getting peers')
 
     with urllib.request.urlopen(url) as page:
