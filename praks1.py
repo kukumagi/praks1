@@ -59,7 +59,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         if message in ["/download", "/download/"]:
             query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-            obj = json.loads(query)
+            obj = json.loads(query.decode("utf8"))
             self.wfile.write(bytes("\n<br>" + str(obj[0]), "utf8"))
         else:
             status = "Error in path"
