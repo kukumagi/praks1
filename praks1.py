@@ -34,7 +34,6 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         else:
             status = "Error"
 
-        self.wfile.write(bytes(message, "utf8"))
         self.wfile.write(bytes(status, "utf8"))
 
 
@@ -54,6 +53,20 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes("\n<br>" + str(self.client_address), "utf8"))
         self.wfile.write(bytes("\n<br>" + str(urllib.parse.urlsplit(self.path)), "utf8"))
         self.wfile.write(bytes("\n<br>" + str(urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)), "utf8"))
+
+        message = urllib.parse.urlsplit(self.path).path
+        params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+        status = ""
+        if message in ["/download", "/download/"]:
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+            if query in ["id", "test"]:
+                pass
+            else:
+                status = "Error in query"
+        else:
+            status = "Error in path"
+
+        self.wfile.write(bytes(status, "utf8"))
         return
 
 def testclient():
@@ -98,9 +111,5 @@ def run():
 
 
 run()
-# try:
-#     _thread.start_new_thread(run())
-#     _thread.start_new_thread(getpeers())
-# except:
-#    print ("Error: unable to start thread")
+
 # #testclient()
