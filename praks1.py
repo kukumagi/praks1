@@ -126,7 +126,7 @@ def forward(x, params):
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
-    connection.request('GET', '/download?id=' + params['id'][0] + '&url=' + params['url'][0])
+    connection.request('GET', '/download?id=' + params['id'][0] + '&url=' + urllib.parse.quote(params['url'][0]))
     response = connection.getresponse()
     print(response.read().decode())
 
