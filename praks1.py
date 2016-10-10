@@ -123,7 +123,7 @@ def forward(x, params):
 
 def sendback(ip, params, data):
     print('Returning to ...')
-    connection = HTTPConnection(ip[0] + ':' + ip[1])
+    connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
     body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data)}
