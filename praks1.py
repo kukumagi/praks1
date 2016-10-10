@@ -7,8 +7,8 @@ import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
 
-#IP = '127.0.0.1'
-IP = '192.168.3.35'
+IP = '127.0.0.1'
+#IP = '192.168.3.35'
 PORT = 1215
 
 laziness = 0.5
