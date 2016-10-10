@@ -81,6 +81,7 @@ def getpeers():
         print(peers)
         peers_obj = json.loads(peers)
         #peers_obj[0] omab ip v''rtust.
+        print(peers_obj[0])
     for x in range(len(peers_obj)):
         neighbours[x] = peers_obj[x].split(sep=':')
     threading.Timer(60, getpeers()).start()
