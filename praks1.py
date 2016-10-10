@@ -83,7 +83,7 @@ def getpeers():
         #peers_obj[0] omab ip v''rtust
     for x in range(len(peers_obj)):
         neighbours[x] = peers_obj[x].split(sep=':')
-    print(neighbours)
+    print(neighbours[0][0])
 
 def run():
     print('starting server....')
