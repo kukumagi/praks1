@@ -121,7 +121,7 @@ def forward(x, params):
 
 def sendback(ip, params):
     print('Returning to ...')
-    connection = HTTPConnection(ip + ':' + 1215)
+    connection = HTTPConnection(ip[0] + ':' + ip[1])
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
     #headers = {'Content-type': 'application/json'}
