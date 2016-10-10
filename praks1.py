@@ -122,7 +122,7 @@ def sendback(ip, params):
     print('Returning to ...')
     connection = HTTPConnection(ip[0] + ':' + ip[1])
     #print(params['id'][0])
-    #connection = http.client.HTTPSConnection('google.ee')
+    #connection = http.client.HTTPSConnection('google.ee').
     #headers = {'Content-type': 'application/json'}
     connection.request('POST', '/file?id=' + params['id'][0])
     response = connection.getresponse()
