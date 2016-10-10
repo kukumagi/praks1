@@ -100,6 +100,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 def forward(x, id, url):
     print('Forwarding to ...')
     connection = HTTPConnection(x['IP'] + ':' + x['PORT'])
+    print('forward ip:' + x['IP'] + ':' + x['PORT'])
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
     connection.request('GET', '/download?id=' + id + '&url=' + url)
