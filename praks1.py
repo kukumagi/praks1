@@ -84,7 +84,7 @@ def getpeers():
         print(peers_obj[0])
     i = 0
     for x in peers_obj:
-        neighbours[i] = x.split(sep=':')
+        print(x.split(sep=':'))
         i += 1
     threading.Timer(60, getpeers()).start()
 
