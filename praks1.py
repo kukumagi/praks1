@@ -62,10 +62,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         # Send message back to client
         message = "OK"
+
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
 
         senderip = self.client_address
+        print(senderip[0])
         message = urllib.parse.urlsplit(self.path).path
         status = ""
         if message in ["/download", "/download/"]:
@@ -77,10 +79,16 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 else:
                     print('forwarding')
                     #forward
+                    for x in neighbours:
+                        if x['IP'] == senderip[0]:
+                            pass
+                        else:
+                            #forward
+                            forward(x, params['id'], params['url'])
                     temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
-                    print(temp)
+                    #print(temp)
                     route.append(temp)
-                    print(route[0])
+                    #print(route[0])
             except:
                 status = "Error in parameters"
         else:
@@ -89,11 +97,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(status, "utf8"))
         return
 
-def testclient():
-    connection = HTTPConnection(IP + PORT)
+def forward(x, id, url):
+    print('Forwarding to ...')
+    connection = HTTPConnection(x['IP'] + ':' + x['PORT'])
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
-    connection.request('GET', '/message?param1=val1')
+    connection.request('GET', '/download?id=' + id + '&url=' + url)
     response = connection.getresponse()
     print(response.read().decode())
 
@@ -112,10 +121,11 @@ def getpeers():
 
     for x in peers_obj:
         t = x.split(sep=':')
-        if t in neighbours:
+        temp = {'IP': t[0], 'PORT': t[1]}
+        if temp in neighbours:
             pass
         else:
-            neighbours.append(t)
+            neighbours.append(temp)
             #neighbours = { 'IP' : t[0], 'PORT' : t[1]}
     print(neighbours)
 
