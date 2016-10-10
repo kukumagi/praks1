@@ -7,7 +7,8 @@ import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
 
-IP = '127.0.0.1'
+#IP = '127.0.0.1'
+IP = '192.168.3.35'
 PORT = 1215
 
 laziness = 0.5
@@ -19,7 +20,6 @@ route = []
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
-        getpeers()
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
@@ -71,10 +71,10 @@ def getpeers():
         mybytes = page.read()
         peers = mybytes.decode("utf8")
         page.close()
-        print(peers)
+        # print(peers)
         peers_obj = json.loads(peers)
         #peers_obj[0] omab ip v''rtust.
-        print(peers_obj[0])
+        # print(peers_obj[0])
 
     for x in peers_obj:
         t = x.split(sep=':')
@@ -82,7 +82,7 @@ def getpeers():
             pass
         else:
             neighbours.append(t)
-        print(neighbours)
+    print(neighbours)
 
 
 def run():
