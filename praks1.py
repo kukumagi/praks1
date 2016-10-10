@@ -15,6 +15,8 @@ from http.client import HTTPConnection
 IP = '192.168.6.1'
 PORT = 1215
 
+REFRESH_RATE = 60
+
 laziness = 0.5
 url = 'http://192.168.3.11:1215/getpeers'
 
@@ -152,7 +154,7 @@ def forwardpost(ip, id, data):
     print(response.read().decode())
 
 def getpeers():
-    threading.Timer(5, getpeers).start()
+    threading.Timer(REFRESH_RATE, getpeers).start()
     print('getting peers')
 
     with urllib.request.urlopen(url) as page:
