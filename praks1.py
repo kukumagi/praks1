@@ -78,7 +78,9 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                     pass
                 else:
                     #forward
-                    route[0] = { 'ID' : params['id'], 'SENDERIP' : senderip }
+                    temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
+                    route.append(temp)
+                    print(route[0])
                     pass
             except:
                 status = "Error in parameters"
@@ -114,8 +116,8 @@ def getpeers():
         if t in neighbours:
             pass
         else:
-            #neighbours.append(t)
-            neighbours = { 'IP' : t[0], 'PORT' : t[1]}
+            neighbours.append(t)
+            #neighbours = { 'IP' : t[0], 'PORT' : t[1]}
     print(neighbours)
 
 def genid():
