@@ -14,7 +14,7 @@ laziness = 0.5
 url = 'http://192.168.3.11:1215/getpeers'
 
 neighbours = []
-route = None
+route = []
 
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
@@ -78,7 +78,7 @@ def getpeers():
     i = 0
     for x in peers_obj:
         t = x.split(sep=':')
-        neighbours[i] = t
+        neighbours[i].append(t)
         i += 1
 
 
