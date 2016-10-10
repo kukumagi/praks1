@@ -70,7 +70,9 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         if message in ["/download", "/download/"]:
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-            if random.random > laziness:
+            r = random.random
+            print(r)
+            if r > laziness:
                 #download
                 print('downloading')
             else:
