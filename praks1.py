@@ -84,7 +84,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                         pass
                     else:
                         #forward
-                        forward(x, params['id'], params['url'])
+                        forward(x, params)
                 temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
                 #print(temp)
                 route.append(temp)
@@ -100,13 +100,13 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(status, "utf8"))
         return
 
-def forward(x, id, url):
+def forward(x, params):
     print('Forwarding to ...')
     connection = HTTPConnection(x['IP'] + ':' + x['PORT'])
     print('forward ip:' + x['IP'] + ':' + x['PORT'])
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
-    connection.request('GET', '/download?id=' + id + '&url=' + url)
+    connection.request('GET', '/download?id=' + params['id'] + '&url=' + params['url'])
     response = connection.getresponse()
     print(response.read().decode())
 
