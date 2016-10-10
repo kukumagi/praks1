@@ -72,23 +72,26 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         if message in ["/download", "/download/"]:
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+
+            if random.random() < laziness:
+                #download
+                print('downloading')
+            else:
+                print('forwarding')
+                #forward
+                for x in neighbours:
+                    if x['IP'] == senderip[0]:
+                        pass
+                    else:
+                        #forward
+                        forward(x, params['id'], params['url'])
+                temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
+                #print(temp)
+                route.append(temp)
+                #print(route[0])
             try:
-                if random.random() < laziness:
-                    #download
-                    print('downloading')
-                else:
-                    print('forwarding')
-                    #forward
-                    for x in neighbours:
-                        if x['IP'] == senderip[0]:
-                            pass
-                        else:
-                            #forward
-                            forward(x, params['id'], params['url'])
-                    temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
-                    #print(temp)
-                    route.append(temp)
-                    #print(route[0])
+                params['id']
+                params['url']
             except:
                 status = "Error in parameters"
         else:
