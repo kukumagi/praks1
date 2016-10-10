@@ -10,7 +10,7 @@ IP = '127.0.0.1'
 PORT = 1215
 
 laziness = 0.5
-url = 'http://192.168.3.249:1215/getpeers'
+url = 'http://192.168.3.11:1215/getpeers'
 
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
@@ -62,20 +62,19 @@ def testclient():
 def getpeers():
     print('getting peers')
 
-    f = urllib.request.urlopen('http://192.168.3.11:1215/getpeers')
-    print(f.read())
+    # f = urllib.request.urlopen('http://192.168.3.11:1215/getpeers')
+    # print(f.read())
 
     # req = urllib.request.Request(url)
     # with urllib.request.urlopen(req) as response:
     #     the_page = response.read()
     #     print(the_page)
 
-    # with urllib.request.urlopen(url) as page:
-    #     mybytes = page.read()
-    #     print(mybytes)
-    #     peers = mybytes.decode("utf8")
-    #     page.close()
-    #     print(peers)
+    with urllib.request.urlopen(url) as page:
+        mybytes = page.read()
+        peers = mybytes.decode("utf8")
+        page.close()
+        print(peers)
 
 def run():
     print('starting server...')
