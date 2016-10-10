@@ -3,6 +3,7 @@
 import urllib, urllib.request
 import json
 import threading
+import _thread
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
@@ -88,14 +89,18 @@ def getpeers():
 def run():
     print('starting server....')
 
-
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = (IP, PORT)
     httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
     print('running server...')
-    httpd.serve_forever()
+    threading.Thread(target = httpd.serve_forever).start()
+    threading.Thread(target = getpeers).start()
 
 
 run()
-#testclient()
-getpeers()
+# try:
+#     _thread.start_new_thread(run())
+#     _thread.start_new_thread(getpeers())
+# except:
+#    print ("Error: unable to start thread")
+# #testclient()
