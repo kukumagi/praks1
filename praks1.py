@@ -67,7 +67,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(message, "utf8"))
 
         senderip = self.client_address
-        print('Sender ip : ' + senderip)
+        print('Sender ip : ' + senderip[0] + ' port ' + senderip[1])
         message = urllib.parse.urlsplit(self.path).path
         status = ""
         if message in ["/download", "/download/"]:
