@@ -62,10 +62,13 @@ def testclient():
 def getpeers():
     print('getting peers')
 
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req) as response:
-        the_page = response.read()
-        print(the_page)
+    f = urllib.request.urlopen('http://192.168.3.249:1215/getpeers')
+    print(f.read())
+
+    # req = urllib.request.Request(url)
+    # with urllib.request.urlopen(req) as response:
+    #     the_page = response.read()
+    #     print(the_page)
 
     # with urllib.request.urlopen(url) as page:
     #     mybytes = page.read()
