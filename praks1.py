@@ -79,14 +79,16 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             else:
                 print('forwarding')
                 #forward
+                templist = []
                 for x in neighbours:
                     if x['IP'] == senderip[0]:
                         pass
                     else:
                         #forward
                         forward(x, params)
-                temp = { 'ID' : params['id'][0], 'SENDERIP' : senderip }
-                #print(temp)
+                        templist.append(x['IP'])
+                temp = { 'ID' : params['id'][0], 'SENDERIP' : senderip, 'FILEIP' : templist }
+                print(temp)
                 route.append(temp)
                 #print(route[0])
             try:
