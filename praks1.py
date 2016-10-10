@@ -78,7 +78,7 @@ def getpeers():
     i = 0
     for x in peers_obj:
         t = x.split(sep=':')
-        neighbours[i].append(t)
+        neighbours[i].add(t)
         i += 1
 
 
