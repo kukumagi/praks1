@@ -94,9 +94,8 @@ def run():
     httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
     print('running server...')
     httpd.serve_forever()
-    getpeers()
 
 
 run()
 #testclient()
-#getpeers()
+getpeers()
