@@ -71,11 +71,9 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if message in ["/download", "/download/"]:
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
             try:
-                params['id']
-                params['url']
                 if random.random < laziness:
                     #download
-                    pass
+                    print('downloading')
                 else:
                     print('forwarding')
                     #forward
