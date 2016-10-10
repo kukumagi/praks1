@@ -75,6 +75,7 @@ def run():
     server_address = (IP, PORT)
     httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
     print('running server...')
+    getpeers()
     httpd.serve_forever()
 
 
