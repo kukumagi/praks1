@@ -62,7 +62,6 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             print(query)
             obj = json.loads(query)
             print(obj[0])
-            self.wfile.write(bytes("\n<br>" + str(obj[0]), "utf8"))
         else:
             status = "Error in path"
 
