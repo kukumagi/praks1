@@ -70,18 +70,19 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
         if message in ["/download", "/download/"]:
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-            r = random.random()
-            print(r)
-            if r > laziness:
-                #download
-                print('downloading')
-            else:
-                print('forwarding')
-                #forward.
-                temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
-                print(temp)
-                route.append(temp)
-                print(route)
+            try:
+                if random.random() < laziness:
+                    #download
+                    print('downloading')
+                else:
+                    print('forwarding')
+                    #forward
+                    temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
+                    print(temp)
+                    route.append(temp)
+                    print(route)
+            except:
+                status = "Error in parameters"
         else:
             status = "Error in path"
 
