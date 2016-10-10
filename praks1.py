@@ -13,7 +13,7 @@ PORT = 1215
 laziness = 0.5
 url = 'http://192.168.3.11:1215/getpeers'
 
-neighbours = None
+neighbours = []
 route = None
 
 # HTTPRequestHandler class
