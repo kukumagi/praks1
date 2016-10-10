@@ -75,7 +75,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 print('downloading')
             else:
                 print('forwarding')
-                #forward
+                #forward.
                 temp = { 'ID' : params['id'], 'SENDERIP' : senderip }
                 print(temp)
                 route.append(temp)
