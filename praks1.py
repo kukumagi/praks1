@@ -62,7 +62,7 @@ def testclient():
 def getpeers():
     print('getting peers')
 
-    f = urllib.request.urlopen('http://192.168.3.249:1215/getpeers')
+    f = urllib.request.urlopen('http://192.168.3.11:1215/getpeers')
     print(f.read())
 
     # req = urllib.request.Request(url)
