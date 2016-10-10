@@ -78,16 +78,16 @@ def getpeers():
         mybytes = page.read()
         peers = mybytes.decode("utf8")
         page.close()
-        # print(peers)
+        print(peers)
         peers_obj = json.load(peers)
         #peers_obj[0] omab ip v''rtust
     for x in range(len(peers_obj)):
         neighbours[x] = peers_obj[x].split(sep=':')
-    print(neighbours[0][0])
+    threading.Timer(60, getpeers()).start()
 
 def run():
     print('starting server....')
-    threading.Timer(60, getpeers).start()
+    getpeers()
 
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = (IP, PORT)
