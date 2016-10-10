@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import urllib, urllib.request
-
+import json
+import threading
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
@@ -11,6 +12,9 @@ PORT = 1215
 
 laziness = 0.5
 url = 'http://192.168.3.11:1215/getpeers'
+
+neighbours = None
+route = None
 
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
@@ -74,17 +78,21 @@ def getpeers():
         mybytes = page.read()
         peers = mybytes.decode("utf8")
         page.close()
-        print(peers)
+        # print(peers)
+        peers_obj = json.load(peers)
+        #peers_obj[0] omab ip v''rtust
+    for x in range(len(peers_obj)):
+        neighbours[x] = peers_obj[x].split(sep=':')
+    print(neighbours)
 
 def run():
     print('starting server...')
-
+    threading.Timer(60, getpeers).start()
 
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = (IP, PORT)
     httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
     print('running server...')
-    getpeers()
     httpd.serve_forever()
 
 
