@@ -5,12 +5,14 @@ import json
 import threading
 import random
 import base64
+import cgi, cgitb
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
 
-IP = '127.0.0.1'
+#IP = '127.0.0.1'
 #IP = '192.168.3.35'
+IP = '192.168.6.1'
 PORT = 1215
 
 laziness = 0.5
@@ -40,9 +42,17 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         message = urllib.parse.urlsplit(self.path).path
         params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
         status = ""
+        form = cgi.FieldStorage
         if message in ["/file", "/file/"]:
             try:
                 params['id']
+                download = 1
+                for x in route:
+                    if params['id'][0] == x['ID']:
+                        forwardpost(x['SENDERIP'], params['id'][0], form['content'])
+                        download = 2
+                if download == 1:
+                    print(base64.b64decode(form['content']))
                 #return
             except:
                 status = "Error in parameters"
@@ -128,6 +138,16 @@ def sendback(ip, params, data):
     #connection = http.client.HTTPSConnection('google.ee').
     body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data)}
     connection.request('POST', '/file?id=' + params['id'][0], body)
+    response = connection.getresponse()
+    print(response.read().decode())
+
+def forwardpost(ip, id, data):
+    print('Returning to ...')
+    connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
+    #print(params['id'][0])
+    #connection = http.client.HTTPSConnection('google.ee').
+    body = {'status': 200, 'mime-type': 'text/html', 'content' : data}
+    connection.request('POST', '/file?id=' + id, body)
     response = connection.getresponse()
     print(response.read().decode())
 
