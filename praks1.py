@@ -12,7 +12,7 @@ IP = '127.0.0.1'
 #IP = '192.168.3.35'
 PORT = 1215
 
-laziness = 0.5
+laziness = 1
 url = 'http://192.168.3.11:1215/getpeers'
 
 neighbours = []
@@ -73,7 +73,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             try:
                 params['id']
                 params['url']
-                if random.random >= laziness:
+                if random.random > laziness:
                     #download
                     pass
                 else:
