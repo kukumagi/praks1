@@ -61,12 +61,18 @@ def testclient():
 
 def getpeers():
     print('getting peers')
-    with urllib.request.urlopen(url) as page:
-        mybytes = page.read()
-        print(mybytes)
-        peers = mybytes.decode("utf8")
-        page.close()
-        print(peers)
+
+    req = urllib.request.Request(url)
+    with urllib.request.urlopen(req) as response:
+        the_page = response.read()
+        print(the_page)
+
+    # with urllib.request.urlopen(url) as page:
+    #     mybytes = page.read()
+    #     print(mybytes)
+    #     peers = mybytes.decode("utf8")
+    #     page.close()
+    #     print(peers)
 
 def run():
     print('starting server...')
