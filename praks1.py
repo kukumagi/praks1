@@ -42,23 +42,21 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         length = int(self.headers['Content-Length'])
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
-        print(post_data)
+
 
         senderip = self.client_address
         message = urllib.parse.urlsplit(self.path).path
         params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
         status = ""
-        form = cgi.FieldStorage
         if message in ["/file", "/file/"]:
             params['id']
             download = 1
             for x in route:
                 if params['id'][0] == x['ID']:
-                    forwardpost(x['SENDERIP'], params['id'][0], form['content'])
+                    forwardpost(x['SENDERIP'], params['id'][0], post_data['content'])
                     download = 2
             if download == 1:
-                print(base64.b64decode(form['content']))
-            #return
+                print(base64.b64decode(post_data['content']))
         else:
             status = "Error"
 
