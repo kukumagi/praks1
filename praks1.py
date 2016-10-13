@@ -40,6 +40,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
 
+        length = int(self.headers['Content-Length'])
+        post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
+        print(post_data)
+
         senderip = self.client_address
         message = urllib.parse.urlsplit(self.path).path
         params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
