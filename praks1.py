@@ -12,7 +12,7 @@ from http.client import HTTPConnection
 
 #IP = '127.0.0.1'
 #IP = '192.168.3.35'
-IP = '192.168.3.14'
+IP = '192.168.6.1'
 PORT = 1215
 
 REFRESH_RATE = 60
