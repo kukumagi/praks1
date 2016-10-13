@@ -56,6 +56,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                     forwardpost(x['SENDERIP'], params['id'][0], post_data['content'])
                     download = 2
             if download == 1:
+                print(post_data['content'])
                 print(base64.b64decode(post_data['content']))
         else:
             status = "Error"
