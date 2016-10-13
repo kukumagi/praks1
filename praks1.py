@@ -53,10 +53,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             download = 1
             for x in route:
                 if params['id'][0] == x['ID']:
-                    forwardpost(x['SENDERIP'], params['id'][0], post_data['content'])
+                    forwardpost(x['SENDERIP'], params['id'][0], post_data['content'][0])
                     download = 2
             if download == 1:
-                print(post_data['content'])
+                print(post_data['content'][0])
                 print(base64.b64decode(post_data['content']))
         else:
             status = "Error"
