@@ -53,13 +53,14 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if message in ["/file", "/file/"]:
             params['id']
             download = 1
+            print(route)
             for x in route:
                 if params['id'][0] == x['ID']:
                     forwardpost(x['SENDERIP'], params['id'][0], post_data['content'][0])
                     download = 2
-            if download == 1:
-                print(post_data['content'][0])
-                print(base64.b64decode(post_data['content']))
+            # if download == 1:
+            #     print(post_data['content'][0])
+            #     print(base64.b64decode(post_data['content']))
         else:
             status = "Error"
 
@@ -68,6 +69,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
     # GET
     def do_GET(self):
+        print('Get method')
         # Send response status code
         self.send_response(200)
 
