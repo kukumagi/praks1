@@ -155,6 +155,7 @@ def sendback(ip, params, data):
     body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
     connection.request('POST', '/file?id=' + params['id'][0], body)
     response = connection.getresponse()
+    print('(sendback), returning to end')
     print(response.read().decode())
 
 def forwardpost(ip, id, data):
@@ -165,6 +166,7 @@ def forwardpost(ip, id, data):
     body = {'status': 200, 'mime-type': 'text/html', 'content' : data, 'body' : data}
     connection.request('POST', '/file?id=' + id, body)
     response = connection.getresponse()
+    print('forwardpost, return end')
     print(response.read().decode())
 
 def getpeers():
