@@ -150,7 +150,7 @@ def sendback(ip, params, data):
     connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
-    body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data)}
+    body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
     connection.request('POST', '/file?id=' + params['id'][0], body)
     response = connection.getresponse()
     print(response.read().decode())
@@ -160,7 +160,7 @@ def forwardpost(ip, id, data):
     connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
-    body = {'status': 200, 'mime-type': 'text/html', 'content' : data}
+    body = {'status': 200, 'mime-type': 'text/html', 'content' : data, 'body' : data}
     connection.request('POST', '/file?id=' + id, body)
     response = connection.getresponse()
     print(response.read().decode())
