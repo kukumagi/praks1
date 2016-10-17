@@ -32,7 +32,7 @@ FILEIP = 2
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
-        print("POST method")
+        print('POST method')
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
