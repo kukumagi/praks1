@@ -95,9 +95,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         print(senderip)
         message = urllib.parse.urlsplit(self.path).path
         status = ""
+
         if message in ["/download", "/download/"]:
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-
+            print('Params>')
+            print(params)
             if random.random() < laziness:
                 #download
                 print('downloading')
@@ -148,7 +150,7 @@ def forward(x, params):
 
 
 def sendback(ip, params, data):
-    print('Returning to ...')
+    print('Sendback > Returning to ...')
     connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
     print('1')
     #print(params['id'][0])
