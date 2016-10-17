@@ -150,10 +150,13 @@ def forward(x, params):
 def sendback(ip, params, data):
     print('Returning to ...')
     connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
+    print('1')
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
     body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
+    print('2')
     connection.request('POST', '/file?id=' + params['id'][0], body)
+    print('3')
     response = connection.getresponse()
     print('(sendback), returning to end')
     print(response.read().decode())
