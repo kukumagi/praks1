@@ -53,8 +53,13 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if message in ["/file", "/file/"]:
             params['id']
             download = 1
+            print('routing table in do post')
             print(route)
             for x in route:
+                download = download + 1
+                print(download)
+                print(x['ID'])
+                print(params['id'][0])
                 if params['id'][0] == x['ID']:
                     forwardpost(x['SENDERIP'], params['id'][0], post_data['content'][0])
                     download = 2
@@ -114,7 +119,8 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 temp = { 'ID' : params['id'][0], 'SENDERIP' : senderip, 'FILEIP' : templist }
                 #print(temp)
                 route.append(temp)
-                #print(route[0])
+                print('Routing table in forwarding')
+                print(route)
             try:
                 params['id']
                 params['url']
@@ -150,7 +156,7 @@ def sendback(ip, params, data):
     print(response.read().decode())
 
 def forwardpost(ip, id, data):
-    print('Returning to ...')
+    print('Return post to ...')
     connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
