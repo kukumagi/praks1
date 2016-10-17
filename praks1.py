@@ -11,8 +11,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
 
 #IP = '127.0.0.1'
-IP = '192.168.3.25'
-#IP = '192.168.6.1'
+#IP = '192.168.3.25'
+IP = '192.168.6.1'
 PORT = 1215
 
 REFRESH_RATE = 60
@@ -31,6 +31,7 @@ FILEIP = 2
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
+        print("POST method")
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
@@ -132,6 +133,8 @@ def forward(x, params):
     connection.request('GET', '/download?id=' + params['id'][0] + '&url=' + urllib.parse.quote(params['url'][0]))
     response = connection.getresponse()
     print(response.read().decode())
+
+
 
 def sendback(ip, params, data):
     print('Returning to ...')
