@@ -155,6 +155,8 @@ def sendback(ip, params, data):
     #connection = http.client.HTTPSConnection('google.ee').
     body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
     print('2')
+    print(body)
+    print(params['id'][0])
     connection.request('POST', '/file?id=' + params['id'][0], body)
     print('3')
     response = connection.getresponse()
