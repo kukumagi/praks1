@@ -44,6 +44,8 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         length = int(self.headers['Content-Length'])
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
+        print('post data')
+        print(post_data)
 
 
         senderip = self.client_address
