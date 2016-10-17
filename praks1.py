@@ -10,9 +10,9 @@ import cgi, cgitb
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection
 
-#IP = '127.0.0.1'
+IP = '127.0.0.1'
 #IP = '192.168.3.35'
-IP = '192.168.6.1'
+#IP = '192.168.6.1'
 PORT = 1215
 
 REFRESH_RATE = 60
@@ -176,8 +176,6 @@ def getpeers():
             #neighbours = { 'IP' : t[0], 'PORT' : t[1]}
     print(neighbours)
 
-def genid():
-    return random.randint(1, 100000)
 
 def run():
     print('starting server....')
