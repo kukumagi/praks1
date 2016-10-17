@@ -168,7 +168,7 @@ def forwardpost(ip, id, data):
 def getpeers():
     threading.Timer(REFRESH_RATE, getpeers).start()
     print('getting peers')
-    neighbours = ""
+    neighbours.clear()
     with urllib.request.urlopen(url) as page:
         mybytes = page.read()
         peers = mybytes.decode("utf8")
