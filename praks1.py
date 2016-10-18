@@ -100,9 +100,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             test = urllib.parse.urlsplit(self.path).query
             print(test)
             params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+            result = urllib.parse.urlparse(self.path)
+            print('result')
+            print(result)
             print('Params>')
-            print(params['id'])
-            print(params['url'])
+
             if random.random() < laziness:
                 #download
                 print('downloading')
@@ -160,9 +162,10 @@ def sendback(ip, params, data):
     #connection = http.client.HTTPSConnection('google.ee').
     body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
     print('2')
-    print(body)
-    print(params['id'][0])
-    connection.request('POST', '/file?id=' + params['id'][0], body)
+
+    data = urllib.parse.urlencode(body)
+    data = data.encode('ascii')
+    connection.request('POST', '/file?id=' + params['id'][0], data)
     print('3')
     response = connection.getresponse()
     print('(sendback), returning to end')
@@ -174,7 +177,9 @@ def forwardpost(ip, id, data):
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
     body = {'status': 200, 'mime-type': 'text/html', 'content' : data, 'body' : data}
-    connection.request('POST', '/file?id=' + id, body)
+    data = urllib.parse.urlencode(body)
+    data = data.encode('ascii')
+    connection.request('POST', '/file?id=' + id, data)
     response = connection.getresponse()
     print('forwardpost, return end')
     print(response.read().decode())
