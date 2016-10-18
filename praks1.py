@@ -44,9 +44,6 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         length = int(self.headers['Content-Length'])
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
-        print('post data')
-        print(post_data)
-
 
         senderip = self.client_address
         message = urllib.parse.urlsplit(self.path).path
@@ -64,6 +61,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 print(params['id'][0])
                 if params['id'][0] == x['ID']:
                     forwardpost(x['SENDERIP'], params['id'][0], post_data['content'][0])
+                    route.remove(x)
                     download = 2
             # if download == 1:
             #     print(post_data['content'][0])
@@ -97,13 +95,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         status = ""
 
         if message in ["/download", "/download/"]:
-            print(self.path)
-            params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
-            print('Params>')
-            print(params['url'])
-            print(params['id'])
-
-
+            params = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
             if random.random() < laziness:
                 #download
                 print('downloading')
