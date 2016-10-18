@@ -94,16 +94,17 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         print('Sender ip : ')
         print(senderip)
         message = urllib.parse.urlsplit(self.path).path
+        print('Message')
+        print(message)
         status = ""
 
         if message in ["/download", "/download/"]:
-            test = urllib.parse.urlsplit(self.path).query
-            print(test)
+            print(self.path)
             params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
             print('Params>')
             print(params['url'])
             print(params['id'])
-            print(self.path)
+
 
             if random.random() < laziness:
                 #download
