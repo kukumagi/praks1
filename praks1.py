@@ -94,12 +94,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         print('Sender ip : ')
         print(senderip)
         message = urllib.parse.urlparse(self.path).path
-        print('Message')
-        print(message)
         status = ""
 
         if message in ["/download", "/download/"]:
-            print(self.path)
+            print('self request')
+            print(self.request)
+            print('end req')
             params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
             print('Params>')
             print(params['url'])
