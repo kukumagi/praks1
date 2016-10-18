@@ -153,12 +153,13 @@ def sendback(ip, params, data):
     print('1')
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
-    body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
+    #body = {'status': 200, 'mime-type': 'text/html', 'content' : base64.b64encode(data), 'body' : base64.b64encode(data)}
     print('2')
+    headers = {'status': 200, 'mime-type': 'text/html'}
+    data = urllib.parse.urlencode({'content' : base64.b64encode(data)})
 
-    data = urllib.parse.urlencode(body)
-    data = data.encode('ascii')
-    connection.request('POST', '/file?id=' + params['id'][0], data)
+    connection.request('POST', '/file?id=' + params['id'][0], data, headers)
+    connection.request()
     print('3')
     response = connection.getresponse()
     print('(sendback), returning to end')
@@ -169,10 +170,14 @@ def forwardpost(ip, id, data):
     connection = HTTPConnection(str(ip[0]) + ':' + str(ip[1]))
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee').
-    body = {'status': 200, 'mime-type': 'text/html', 'content' : data, 'body' : data}
-    data = urllib.parse.urlencode(body)
-    data = data.encode('ascii')
-    connection.request('POST', '/file?id=' + id, data)
+    # body = {'status': 200, 'mime-type': 'text/html', 'content' : data, 'body' : data}
+    # data = urllib.parse.urlencode(body)
+    # data = data.encode('ascii')
+
+    headers = {'status': 200, 'mime-type': 'text/html'}
+    data = urllib.parse.urlencode({'content': base64.b64encode(data)})
+
+    connection.request('POST', '/file?id=' + id, data, headers)
     response = connection.getresponse()
     print('forwardpost, return end')
     print(response.read().decode())
