@@ -93,7 +93,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         senderip = self.client_address
         print('Sender ip : ')
         print(senderip)
-        message = urllib.parse.urlsplit(self.path).path
+        message = urllib.parse.urlparse(self.path).path
         print('Message')
         print(message)
         status = ""
