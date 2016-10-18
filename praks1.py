@@ -135,11 +135,13 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 def forward(x, params):
     print('Forwarding to ...')
     connection = HTTPConnection(x['IP'] + ':' + x['PORT'])
-    print('forward ip:' + x['IP'] + ':' + x['PORT'])
+    print('forwarding to ip:' + x['IP'] + ':' + x['PORT'])
     #print(params['id'][0])
     #connection = http.client.HTTPSConnection('google.ee')
     #headers = {'Content-type': 'application/json'}
-    connection.request('GET', '/download?id=' + params['id'][0] + '&url=' + urllib.parse.quote(params['url'][0]))
+    quotedUrl = urllib.parse.quote(params['url'][0])
+    print('Quoted url>   ' + quotedUrl)
+    connection.request('GET', '/download?id=' + params['id'][0] + '&url=' + quotedUrl)
     response = connection.getresponse()
     print(response.read().decode())
 
