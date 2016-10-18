@@ -98,7 +98,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         if message in ["/download", "/download/"]:
             print('self request')
-            print(self.request)
+            print(self.parse_request())
             print('end req')
             params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
             print('Params>')
