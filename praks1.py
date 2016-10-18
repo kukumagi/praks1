@@ -162,6 +162,7 @@ def sendback(ip, params, data):
     connection.request()
     print('3')
     response = connection.getresponse()
+    print (response.status, response.reason)
     print('(sendback), returning to end')
     print(response.read().decode())
 
@@ -179,6 +180,7 @@ def forwardpost(ip, id, data):
 
     connection.request('POST', '/file?id=' + id, data, headers)
     response = connection.getresponse()
+    print (response.status, response.reason)
     print('forwardpost, return end')
     print(response.read().decode())
 
